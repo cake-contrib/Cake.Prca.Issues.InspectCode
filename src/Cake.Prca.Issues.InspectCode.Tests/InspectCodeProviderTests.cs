@@ -1,8 +1,8 @@
 ﻿namespace Cake.Prca.Issues.InspectCode.Tests
 {
+    using System.Linq;
     using Core.IO;
     using Shouldly;
-    using System.Linq;
     using Testing;
     using Xunit;
 
@@ -14,9 +14,9 @@
             public void Should_Throw_If_Log_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => 
+                var result = Record.Exception(() =>
                     new InspectCodeProvider(
-                        null, 
+                        null,
                         InspectCodeSettings.FromContent(@"foo", @"c:\src")));
 
                 // Then
@@ -72,7 +72,6 @@
                 issue.Priority.ShouldBe(priority);
                 issue.Message.ShouldBe(message);
             }
-
         }
     }
 }

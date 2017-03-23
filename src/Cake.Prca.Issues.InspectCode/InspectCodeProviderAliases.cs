@@ -5,7 +5,7 @@
     using Core.IO;
 
     /// <summary>
-    /// Contains functionality related to importing code analysis issues from JetBrains Inspect Code 
+    /// Contains functionality related to importing code analysis issues from JetBrains Inspect Code
     /// to write them to pull requests.
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
