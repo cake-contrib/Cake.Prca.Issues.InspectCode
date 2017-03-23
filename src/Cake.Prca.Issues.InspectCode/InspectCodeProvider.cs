@@ -32,7 +32,7 @@
         {
             var result = new List<ICodeAnalysisIssue>();
 
-            var logDocument = XDocument.Parse(settings.LogFileContent);
+            var logDocument = XDocument.Parse(this.settings.LogFileContent);
 
             var solutionPath = Path.GetDirectoryName(logDocument.Descendants("Solution").Single().Value);
 

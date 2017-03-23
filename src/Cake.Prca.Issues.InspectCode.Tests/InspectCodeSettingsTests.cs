@@ -14,7 +14,7 @@
             public void Should_Throw_If_LogFilePath_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => 
+                var result = Record.Exception(() =>
                     InspectCodeSettings.FromFilePath(
                         null,
                         new DirectoryPath(@"C:\")));
@@ -91,7 +91,7 @@
             [Fact]
             public void Should_Set_Property_Values_Passed_To_Constructor()
             {
-                // Given 
+                // Given
                 const string logFileContent = "foo";
                 var repoRoot = new DirectoryPath(@"C:\");
 
@@ -126,7 +126,7 @@
                     }
 
                     // When
-                    var settings = 
+                    var settings =
                         InspectCodeSettings.FromFilePath(
                             new FilePath(fileName),
                             new DirectoryPath(@"C:\"));
