@@ -7,17 +7,16 @@
 
     public class InspectCodeProviderFixture
     {
-
         public InspectCodeProviderFixture(string fileResourceName)
         {
             this.Log = new FakeLog();
-            Log.Verbosity = Verbosity.Normal;
+            this.Log.Verbosity = Verbosity.Normal;
 
             using (var stream = this.GetType().Assembly.GetManifestResourceStream("Cake.Prca.Issues.InspectCode.Tests.Testfiles." + fileResourceName))
             {
                 using (var sr = new StreamReader(stream))
                 {
-                    this.Settings = 
+                    this.Settings =
                         InspectCodeSettings.FromContent(
                             sr.ReadToEnd(),
                             new Core.IO.DirectoryPath(@"c:\Source\Cake.Prca"));
