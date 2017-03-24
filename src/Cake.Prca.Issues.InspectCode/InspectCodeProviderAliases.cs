@@ -23,13 +23,16 @@
         /// <para>Report code analysis issues reported by JetBrains Inspect Code to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCodeFromFilePath(
         ///             new FilePath("C:\build\InspectCode.log"),
-        ///             new DirectoryPath("c:\repo")),
+        ///             repoRoot),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>
@@ -58,13 +61,16 @@
         /// <para>Report code analysis issues reported by JetBrains Inspect Code to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCodeFromContent(
         ///             logFileContent,
-        ///             new DirectoryPath("c:\repo")),
+        ///             repoRoot),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>
@@ -92,16 +98,19 @@
         /// <para>Report code analysis issues reported by JetBrains Inspect Code to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
         ///         new InspectCodeSettings(
         ///             new FilePath("C:\build\InspectCode.log"),
-        ///             new DirectoryPath("c:\repo"));
+        ///             repoRoot);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCode(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>
