@@ -9,8 +9,7 @@
     {
         public InspectCodeProviderFixture(string fileResourceName)
         {
-            this.Log = new FakeLog();
-            this.Log.Verbosity = Verbosity.Normal;
+            this.Log = new FakeLog { Verbosity = Verbosity.Normal };
 
             using (var stream = this.GetType().Assembly.GetManifestResourceStream("Cake.Prca.Issues.InspectCode.Tests.Testfiles." + fileResourceName))
             {
@@ -18,8 +17,7 @@
                 {
                     this.Settings =
                         InspectCodeSettings.FromContent(
-                            sr.ReadToEnd(),
-                            new Core.IO.DirectoryPath(@"c:\Source\Cake.Prca"));
+                            sr.ReadToEnd());
                 }
             }
         }

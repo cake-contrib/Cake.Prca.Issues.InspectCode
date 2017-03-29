@@ -17,7 +17,7 @@
                 var result = Record.Exception(() =>
                     new InspectCodeProvider(
                         null,
-                        InspectCodeSettings.FromContent(@"foo", @"c:\src")));
+                        InspectCodeSettings.FromContent(@"foo")));
 
                 // Then
                 result.IsArgumentNullException("log");

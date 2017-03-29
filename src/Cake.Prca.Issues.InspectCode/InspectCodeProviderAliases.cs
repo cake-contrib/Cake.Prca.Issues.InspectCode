@@ -17,7 +17,6 @@
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="logFilePath">Path to the the InspectCode log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported by JetBrains Insepct Code.</returns>
         /// <example>
         /// <para>Report code analysis issues reported by JetBrains Inspect Code to a TFS pull request:</para>
@@ -26,8 +25,7 @@
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCodeFromFilePath(
-        ///             new FilePath("C:\build\InspectCode.log"),
-        ///             repoRoot),
+        ///             new FilePath("C:\build\InspectCode.log")),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -40,14 +38,12 @@
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
         public static ICodeAnalysisProvider InspectCodeFromFilePath(
             this ICakeContext context,
-            FilePath logFilePath,
-            DirectoryPath repositoryRoot)
+            FilePath logFilePath)
         {
             context.NotNull(nameof(context));
             logFilePath.NotNull(nameof(logFilePath));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.InspectCode(InspectCodeSettings.FromFilePath(logFilePath, repositoryRoot));
+            return context.InspectCode(InspectCodeSettings.FromFilePath(logFilePath));
         }
 
         /// <summary>
@@ -55,7 +51,6 @@
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="logFileContent">Content of the the Inspect Code log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported by JetBrains Inspect Code.</returns>
         /// <example>
         /// <para>Report code analysis issues reported by JetBrains Inspect Code to a TFS pull request:</para>
@@ -64,8 +59,7 @@
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCodeFromContent(
-        ///             logFileContent,
-        ///             repoRoot),
+        ///             logFileContent),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -78,14 +72,12 @@
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
         public static ICodeAnalysisProvider InspectCodeFromContent(
             this ICakeContext context,
-            string logFileContent,
-            DirectoryPath repositoryRoot)
+            string logFileContent)
         {
             context.NotNull(nameof(context));
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.InspectCode(InspectCodeSettings.FromContent(logFileContent, repositoryRoot));
+            return context.InspectCode(InspectCodeSettings.FromContent(logFileContent));
         }
 
         /// <summary>
@@ -101,8 +93,7 @@
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
         ///         new InspectCodeSettings(
-        ///             new FilePath("C:\build\InspectCode.log"),
-        ///             repoRoot);
+        ///             new FilePath("C:\build\InspectCode.log"));
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         InspectCode(settings),
