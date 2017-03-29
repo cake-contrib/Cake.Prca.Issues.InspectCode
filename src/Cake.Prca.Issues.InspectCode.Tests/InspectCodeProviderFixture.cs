@@ -36,7 +36,7 @@
         public IEnumerable<ICodeAnalysisIssue> ReadIssues()
         {
             var codeAnalysisProvider = this.Create();
-            return codeAnalysisProvider.ReadIssues();
+            return codeAnalysisProvider.ReadIssues(PrcaCommentFormat.PlainText);
         }
     }
 }
