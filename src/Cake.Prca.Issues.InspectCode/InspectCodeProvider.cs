@@ -28,7 +28,7 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues(PrcaCommentFormat format)
+        protected override IEnumerable<ICodeAnalysisIssue> InternalReadIssues(PrcaCommentFormat format)
         {
             var result = new List<ICodeAnalysisIssue>();
 
