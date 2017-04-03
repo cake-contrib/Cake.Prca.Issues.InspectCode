@@ -14,36 +14,17 @@
             public void Should_Throw_If_LogFilePath_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromFilePath(
-                        null,
-                        new DirectoryPath(@"C:\")));
+                var result = Record.Exception(() => InspectCodeSettings.FromFilePath(null));
 
                 // Then
                 result.IsArgumentNullException("logFilePath");
             }
 
             [Fact]
-            public void Should_Throw_If_RepositoryRoot_For_LogFilePath_Is_Null()
-            {
-                // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromFilePath(
-                            new FilePath(@"C:\foo.log"),
-                            null));
-
-                // Then
-                result.IsArgumentNullException("repositoryRoot");
-            }
-
-            [Fact]
             public void Should_Throw_If_LogFileContent_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromContent(
-                        null,
-                        new DirectoryPath(@"C:\")));
+                var result = Record.Exception(() => InspectCodeSettings.FromContent(null));
 
                 // Then
                 result.IsArgumentNullException("logFileContent");
@@ -53,10 +34,7 @@
             public void Should_Throw_If_LogFileContent_Is_Empty()
             {
                 // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromContent(
-                        string.Empty,
-                        new DirectoryPath(@"C:\")));
+                var result = Record.Exception(() => InspectCodeSettings.FromContent(string.Empty));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
@@ -66,26 +44,10 @@
             public void Should_Throw_If_LogFileContent_Is_WhiteSpace()
             {
                 // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromContent(
-                        " ",
-                        new DirectoryPath(@"C:\")));
+                var result = Record.Exception(() => InspectCodeSettings.FromContent(" "));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
-            }
-
-            [Fact]
-            public void Should_Throw_If_RepositoryRoot_For_LogFileContent_Is_Null()
-            {
-                // Given / When
-                var result = Record.Exception(() =>
-                    InspectCodeSettings.FromContent(
-                        "foo",
-                        null));
-
-                // Then
-                result.IsArgumentNullException("repositoryRoot");
             }
 
             [Fact]
@@ -93,14 +55,12 @@
             {
                 // Given
                 const string logFileContent = "foo";
-                var repoRoot = new DirectoryPath(@"C:\");
 
                 // When
-                var settings = InspectCodeSettings.FromContent(logFileContent, repoRoot);
+                var settings = InspectCodeSettings.FromContent(logFileContent);
 
                 // Then
                 settings.LogFileContent.ShouldBe(logFileContent);
-                settings.RepositoryRoot.ShouldBe(repoRoot);
             }
 
             [Fact]
@@ -126,10 +86,7 @@
                     }
 
                     // When
-                    var settings =
-                        InspectCodeSettings.FromFilePath(
-                            new FilePath(fileName),
-                            new DirectoryPath(@"C:\"));
+                    var settings = InspectCodeSettings.FromFilePath(new FilePath(fileName));
 
                     // Then
                     settings.LogFileContent.ShouldBe(expected);

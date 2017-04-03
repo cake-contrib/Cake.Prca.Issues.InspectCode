@@ -28,7 +28,7 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues()
+        protected override IEnumerable<ICodeAnalysisIssue> InternalReadIssues(PrcaCommentFormat format)
         {
             var result = new List<ICodeAnalysisIssue>();
 
@@ -67,7 +67,7 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue(
+                result.Add(new CodeAnalysisIssue<InspectCodeProvider>(
                     fileName,
                     line,
                     message,
