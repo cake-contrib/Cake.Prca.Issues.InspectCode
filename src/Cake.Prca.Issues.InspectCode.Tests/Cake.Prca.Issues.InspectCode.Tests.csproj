@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionAssertExtensions.cs" />
+    <Compile Include="ExtensionsTests.cs" />
     <Compile Include="InspectCodeProviderFixture.cs" />
     <Compile Include="InspectCodeProviderTests.cs" />
     <Compile Include="InspectCodeSettingsTests.cs" />
