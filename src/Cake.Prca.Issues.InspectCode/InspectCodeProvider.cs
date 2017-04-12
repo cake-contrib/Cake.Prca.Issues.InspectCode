@@ -1,5 +1,6 @@
 ﻿namespace Cake.Prca.Issues.InspectCode
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
@@ -28,13 +29,22 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues()
+        protected override IEnumerable<ICodeAnalysisIssue> InternalReadIssues(PrcaCommentFormat format)
         {
             var result = new List<ICodeAnalysisIssue>();
 
             var logDocument = XDocument.Parse(this.settings.LogFileContent);
 
             var solutionPath = Path.GetDirectoryName(logDocument.Descendants("Solution").Single().Value);
+
+            // Read all issue types
+            var issueTypes =
+                logDocument.Descendants("IssueType").ToDictionary(
+                    x => x.Attribute("Id")?.Value,
+                    x => new IssueType
+                    {
+                        WikiUrl = x.Attribute("WikiUrl")?.Value.ToUri()
+                    });
 
             // Loop through all issue tags.
             foreach (var issue in logDocument.Descendants("Issue"))
@@ -67,12 +77,13 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue(
+                result.Add(new CodeAnalysisIssue<InspectCodeProvider>(
                     fileName,
                     line,
                     message,
                     0, // TODO Set based on severity of issueType
-                    rule));
+                    rule,
+                    issueTypes[rule].WikiUrl));
             }
 
             return result;
@@ -178,6 +189,17 @@
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Description of an issue type.
+        /// </summary>
+        private class IssueType
+        {
+            /// <summary>
+            /// Gets or sets the URL to the page containing documentation about this issue type.
+            /// </summary>
+            public Uri WikiUrl { get; set; }
         }
     }
 }

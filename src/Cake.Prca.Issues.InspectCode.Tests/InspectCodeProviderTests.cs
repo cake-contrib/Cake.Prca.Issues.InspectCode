@@ -17,7 +17,7 @@
                 var result = Record.Exception(() =>
                     new InspectCodeProvider(
                         null,
-                        InspectCodeSettings.FromContent(@"foo", @"c:\src")));
+                        InspectCodeSettings.FromContent(@"foo")));
 
                 // Then
                 result.IsArgumentNullException("log");
@@ -43,18 +43,41 @@
                 var fixture = new InspectCodeProviderFixture("inspectcode.xml");
 
                 // When
-                var issues = fixture.ReadIssues();
+                var issues = fixture.ReadIssues().ToList();
 
                 // Then
-                issues.Count().ShouldBe(1);
+                issues.Count.ShouldBe(1);
                 var issue = issues.Single();
                 CheckIssue(
                     issue,
                     @"src\Cake.Prca\CakeAliasConstants.cs",
                     16,
                     "UnusedMember.Global",
+                    null,
                     0,
                     @"Constant 'PullRequestSystemCakeAliasCategory' is never used");
+            }
+
+            [Fact]
+            public void Should_Read_Rule_Url()
+            {
+                // Given
+                var fixture = new InspectCodeProviderFixture("WithWikiUrl.xml");
+
+                // When
+                var issues = fixture.ReadIssues().ToList();
+
+                // Then
+                issues.Count.ShouldBe(1);
+                var issue = issues.Single();
+                CheckIssue(
+                    issue,
+                    @"src\Cake.CodeAnalysisReporting\CodeAnalysisReportingAliases.cs",
+                    3,
+                    "RedundantUsingDirective",
+                    "http://www.jetbrains.com/resharperplatform/help?Keyword=RedundantUsingDirective",
+                    0,
+                    @"Using directive is not required by the code and can be safely removed");
             }
 
             private static void CheckIssue(
@@ -62,13 +85,32 @@
                 string affectedFileRelativePath,
                 int? line,
                 string rule,
+                string ruleUrl,
                 int priority,
                 string message)
             {
-                issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(affectedFileRelativePath).ToString());
-                issue.AffectedFileRelativePath.IsRelative.ShouldBe(true, "Issue path is not relative");
+                if (issue.AffectedFileRelativePath == null)
+                {
+                    affectedFileRelativePath.ShouldBeNull();
+                }
+                else
+                {
+                    issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(affectedFileRelativePath).ToString());
+                    issue.AffectedFileRelativePath.IsRelative.ShouldBe(true, "Issue path is not relative");
+                }
+
                 issue.Line.ShouldBe(line);
                 issue.Rule.ShouldBe(rule);
+
+                if (issue.RuleUrl == null)
+                {
+                    ruleUrl.ShouldBeNull();
+                }
+                else
+                {
+                    issue.RuleUrl.ToString().ShouldBe(ruleUrl);
+                }
+
                 issue.Priority.ShouldBe(priority);
                 issue.Message.ShouldBe(message);
             }
