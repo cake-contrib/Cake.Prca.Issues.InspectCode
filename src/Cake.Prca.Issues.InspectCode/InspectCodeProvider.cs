@@ -11,7 +11,7 @@
     /// <summary>
     /// Provider for code analysis issues reported by JetBrains Inspect Code.
     /// </summary>
-    public class InspectCodeProvider : CodeAnalysisProvider
+    internal class InspectCodeProvider : CodeAnalysisProvider
     {
         private readonly InspectCodeSettings settings;
 
