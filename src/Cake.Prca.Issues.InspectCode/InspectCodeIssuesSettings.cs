@@ -4,15 +4,15 @@
     using Core.IO;
 
     /// <summary>
-    /// Settings for <see cref="InspectCodeProvider"/>.
+    /// Settings for <see cref="InspectCodeIssuesProvider"/>.
     /// </summary>
-    public class InspectCodeSettings
+    public class InspectCodeIssuesSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InspectCodeSettings"/> class.
+        /// Initializes a new instance of the <see cref="InspectCodeIssuesSettings"/> class.
         /// </summary>
         /// <param name="logFilePath">Path to the the Inspect Code log file.</param>
-        protected InspectCodeSettings(FilePath logFilePath)
+        protected InspectCodeIssuesSettings(FilePath logFilePath)
         {
             logFilePath.NotNull(nameof(logFilePath));
 
@@ -26,10 +26,10 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InspectCodeSettings"/> class.
+        /// Initializes a new instance of the <see cref="InspectCodeIssuesSettings"/> class.
         /// </summary>
         /// <param name="logFileContent">Content of the the Inspect Code log file.</param>
-        protected InspectCodeSettings(string logFileContent)
+        protected InspectCodeIssuesSettings(string logFileContent)
         {
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
 
@@ -42,24 +42,24 @@
         public string LogFileContent { get; private set; }
 
         /// <summary>
-        /// Returns a new instance of the <see cref="InspectCodeSettings"/> class from a log file on disk.
+        /// Returns a new instance of the <see cref="InspectCodeIssuesSettings"/> class from a log file on disk.
         /// </summary>
         /// <param name="logFilePath">Path to the JetBrains Inspect Code log file.</param>
-        /// <returns>Instance of the <see cref="InspectCodeSettings"/> class.</returns>
-        public static InspectCodeSettings FromFilePath(FilePath logFilePath)
+        /// <returns>Instance of the <see cref="InspectCodeIssuesSettings"/> class.</returns>
+        public static InspectCodeIssuesSettings FromFilePath(FilePath logFilePath)
         {
-            return new InspectCodeSettings(logFilePath);
+            return new InspectCodeIssuesSettings(logFilePath);
         }
 
         /// <summary>
-        /// Returns a new instance of the <see cref="InspectCodeSettings"/> class from the content
+        /// Returns a new instance of the <see cref="InspectCodeIssuesSettings"/> class from the content
         /// of a JetBrains Inspect Code log file.
         /// </summary>
         /// <param name="logFileContent">Content of the JetBrains Inspect Code log file.</param>
-        /// <returns>Instance of the <see cref="InspectCodeSettings"/> class.</returns>
-        public static InspectCodeSettings FromContent(string logFileContent)
+        /// <returns>Instance of the <see cref="InspectCodeIssuesSettings"/> class.</returns>
+        public static InspectCodeIssuesSettings FromContent(string logFileContent)
         {
-            return new InspectCodeSettings(logFileContent);
+            return new InspectCodeIssuesSettings(logFileContent);
         }
     }
 }
