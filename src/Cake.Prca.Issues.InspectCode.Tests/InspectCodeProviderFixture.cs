@@ -5,7 +5,7 @@
     using Core.Diagnostics;
     using Testing;
 
-    public class InspectCodeProviderFixture
+    internal class InspectCodeProviderFixture
     {
         public InspectCodeProviderFixture(string fileResourceName)
         {
