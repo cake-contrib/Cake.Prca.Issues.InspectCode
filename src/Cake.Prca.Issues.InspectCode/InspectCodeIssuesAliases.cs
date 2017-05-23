@@ -9,7 +9,6 @@
     /// to write them to pull requests.
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
-    [CakeNamespaceImport("Cake.Prca.Issues.InspectCode")]
     public static class InspectCodeIssuesAliases
     {
         /// <summary>
