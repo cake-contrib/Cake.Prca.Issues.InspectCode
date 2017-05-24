@@ -41,7 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Prca, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cake.Prca.0.3.0\lib\net45\Cake.Prca.dll</HintPath>
+      <HintPath>..\packages\Cake.Prca.0.4.0\lib\net45\Cake.Prca.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="InspectCodeProvider.cs" />
-    <Compile Include="InspectCodeProviderAliases.cs" />
-    <Compile Include="InspectCodeSettings.cs" />
+    <Compile Include="InspectCodeIssuesProvider.cs" />
+    <Compile Include="InspectCodeIssuesAliases.cs" />
+    <Compile Include="InspectCodeIssuesSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,8 +9,7 @@
     /// to write them to pull requests.
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
-    [CakeNamespaceImport("Cake.Prca.Issues.InspectCode")]
-    public static class InspectCodeProviderAliases
+    public static class InspectCodeIssuesAliases
     {
         /// <summary>
         /// Gets an instance of a provider for code analysis issues reported by JetBrains Inspect Code using a log file from disk.
@@ -24,7 +23,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         InspectCodeFromFilePath(
+        ///         InspectCodeIssuesFromFilePath(
         ///             new FilePath("C:\build\InspectCode.log")),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
@@ -36,14 +35,14 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider InspectCodeFromFilePath(
+        public static ICodeAnalysisProvider InspectCodeIssuesFromFilePath(
             this ICakeContext context,
             FilePath logFilePath)
         {
             context.NotNull(nameof(context));
             logFilePath.NotNull(nameof(logFilePath));
 
-            return context.InspectCode(InspectCodeSettings.FromFilePath(logFilePath));
+            return context.InspectCodeIssues(InspectCodeIssuesSettings.FromFilePath(logFilePath));
         }
 
         /// <summary>
@@ -58,7 +57,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         InspectCodeFromContent(
+        ///         InspectCodeIssuesFromContent(
         ///             logFileContent),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
@@ -70,14 +69,14 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider InspectCodeFromContent(
+        public static ICodeAnalysisProvider InspectCodeIssuesFromContent(
             this ICakeContext context,
             string logFileContent)
         {
             context.NotNull(nameof(context));
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
 
-            return context.InspectCode(InspectCodeSettings.FromContent(logFileContent));
+            return context.InspectCodeIssues(InspectCodeIssuesSettings.FromContent(logFileContent));
         }
 
         /// <summary>
@@ -92,11 +91,11 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
-        ///         new InspectCodeSettings(
+        ///         new InspectCodeIssuesSettings(
         ///             new FilePath("C:\build\InspectCode.log"));
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         InspectCode(settings),
+        ///         InspectCodeIssues(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -107,14 +106,14 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider InspectCode(
+        public static ICodeAnalysisProvider InspectCodeIssues(
             this ICakeContext context,
-            InspectCodeSettings settings)
+            InspectCodeIssuesSettings settings)
         {
             context.NotNull(nameof(context));
             settings.NotNull(nameof(settings));
 
-            return new InspectCodeProvider(context.Log, settings);
+            return new InspectCodeIssuesProvider(context.Log, settings);
         }
     }
 }

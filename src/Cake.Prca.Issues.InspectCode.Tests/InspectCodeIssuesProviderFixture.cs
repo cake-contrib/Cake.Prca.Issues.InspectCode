@@ -5,9 +5,9 @@
     using Core.Diagnostics;
     using Testing;
 
-    public class InspectCodeProviderFixture
+    internal class InspectCodeIssuesProviderFixture
     {
-        public InspectCodeProviderFixture(string fileResourceName)
+        public InspectCodeIssuesProviderFixture(string fileResourceName)
         {
             this.Log = new FakeLog { Verbosity = Verbosity.Normal };
 
@@ -16,7 +16,7 @@
                 using (var sr = new StreamReader(stream))
                 {
                     this.Settings =
-                        InspectCodeSettings.FromContent(
+                        InspectCodeIssuesSettings.FromContent(
                             sr.ReadToEnd());
                 }
             }
@@ -27,13 +27,13 @@
 
         public FakeLog Log { get; set; }
 
-        public InspectCodeSettings Settings { get; set; }
+        public InspectCodeIssuesSettings Settings { get; set; }
 
         public ReportCodeAnalysisIssuesToPullRequestSettings PrcaSettings { get; set; }
 
-        public InspectCodeProvider Create()
+        public InspectCodeIssuesProvider Create()
         {
-            var provider = new InspectCodeProvider(this.Log, this.Settings);
+            var provider = new InspectCodeIssuesProvider(this.Log, this.Settings);
             provider.Initialize(this.PrcaSettings);
             return provider;
         }
