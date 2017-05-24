@@ -11,16 +11,16 @@
     /// <summary>
     /// Provider for code analysis issues reported by JetBrains Inspect Code.
     /// </summary>
-    internal class InspectCodeProvider : CodeAnalysisProvider
+    internal class InspectCodeIssuesProvider : CodeAnalysisProvider
     {
-        private readonly InspectCodeSettings settings;
+        private readonly InspectCodeIssuesSettings settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InspectCodeProvider"/> class.
+        /// Initializes a new instance of the <see cref="InspectCodeIssuesProvider"/> class.
         /// </summary>
         /// <param name="log">The Cake log context.</param>
         /// <param name="settings">Settings for reading the log file.</param>
-        public InspectCodeProvider(ICakeLog log, InspectCodeSettings settings)
+        public InspectCodeIssuesProvider(ICakeLog log, InspectCodeIssuesSettings settings)
             : base(log)
         {
             settings.NotNull(nameof(settings));
@@ -77,7 +77,7 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue<InspectCodeProvider>(
+                result.Add(new CodeAnalysisIssue<InspectCodeIssuesProvider>(
                     fileName,
                     line,
                     message,

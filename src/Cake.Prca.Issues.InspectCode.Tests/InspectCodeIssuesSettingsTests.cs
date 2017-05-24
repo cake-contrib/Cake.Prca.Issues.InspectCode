@@ -6,15 +6,15 @@
     using Shouldly;
     using Xunit;
 
-    public class InspectCodeSettingsTests
+    public class InspectCodeIssuesSettingsTests
     {
-        public sealed class TheInspectCodeSettings
+        public sealed class TheInspectCodeIssuesSettingsCtor
         {
             [Fact]
             public void Should_Throw_If_LogFilePath_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => InspectCodeSettings.FromFilePath(null));
+                var result = Record.Exception(() => InspectCodeIssuesSettings.FromFilePath(null));
 
                 // Then
                 result.IsArgumentNullException("logFilePath");
@@ -24,7 +24,7 @@
             public void Should_Throw_If_LogFileContent_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => InspectCodeSettings.FromContent(null));
+                var result = Record.Exception(() => InspectCodeIssuesSettings.FromContent(null));
 
                 // Then
                 result.IsArgumentNullException("logFileContent");
@@ -34,7 +34,7 @@
             public void Should_Throw_If_LogFileContent_Is_Empty()
             {
                 // Given / When
-                var result = Record.Exception(() => InspectCodeSettings.FromContent(string.Empty));
+                var result = Record.Exception(() => InspectCodeIssuesSettings.FromContent(string.Empty));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
@@ -44,7 +44,7 @@
             public void Should_Throw_If_LogFileContent_Is_WhiteSpace()
             {
                 // Given / When
-                var result = Record.Exception(() => InspectCodeSettings.FromContent(" "));
+                var result = Record.Exception(() => InspectCodeIssuesSettings.FromContent(" "));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
@@ -57,7 +57,7 @@
                 const string logFileContent = "foo";
 
                 // When
-                var settings = InspectCodeSettings.FromContent(logFileContent);
+                var settings = InspectCodeIssuesSettings.FromContent(logFileContent);
 
                 // Then
                 settings.LogFileContent.ShouldBe(logFileContent);
@@ -86,7 +86,7 @@
                     }
 
                     // When
-                    var settings = InspectCodeSettings.FromFilePath(new FilePath(fileName));
+                    var settings = InspectCodeIssuesSettings.FromFilePath(new FilePath(fileName));
 
                     // Then
                     settings.LogFileContent.ShouldBe(expected);

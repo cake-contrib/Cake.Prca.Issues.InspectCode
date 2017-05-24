@@ -6,18 +6,18 @@
     using Testing;
     using Xunit;
 
-    public class InspectCodeProviderTests
+    public class InspectCodeIssuesProviderTests
     {
-        public sealed class TheInspectCodeProviderCtor
+        public sealed class TheInspectCodeIssuesProviderCtor
         {
             [Fact]
             public void Should_Throw_If_Log_Is_Null()
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new InspectCodeProvider(
+                    new InspectCodeIssuesProvider(
                         null,
-                        InspectCodeSettings.FromContent(@"foo")));
+                        InspectCodeIssuesSettings.FromContent(@"foo")));
 
                 // Then
                 result.IsArgumentNullException("log");
@@ -27,7 +27,7 @@
             public void Should_Throw_If_Settings_Are_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => new InspectCodeProvider(new FakeLog(), null));
+                var result = Record.Exception(() => new InspectCodeIssuesProvider(new FakeLog(), null));
 
                 // Then
                 result.IsArgumentNullException("settings");
@@ -40,7 +40,7 @@
             public void Should_Read_Issue_Correct()
             {
                 // Given
-                var fixture = new InspectCodeProviderFixture("inspectcode.xml");
+                var fixture = new InspectCodeIssuesProviderFixture("inspectcode.xml");
 
                 // When
                 var issues = fixture.ReadIssues().ToList();
@@ -62,7 +62,7 @@
             public void Should_Read_Rule_Url()
             {
                 // Given
-                var fixture = new InspectCodeProviderFixture("WithWikiUrl.xml");
+                var fixture = new InspectCodeIssuesProviderFixture("WithWikiUrl.xml");
 
                 // When
                 var issues = fixture.ReadIssues().ToList();

@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="InspectCodeProvider.cs" />
-    <Compile Include="InspectCodeProviderAliases.cs" />
-    <Compile Include="InspectCodeSettings.cs" />
+    <Compile Include="InspectCodeIssuesProvider.cs" />
+    <Compile Include="InspectCodeIssuesAliases.cs" />
+    <Compile Include="InspectCodeIssuesSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
