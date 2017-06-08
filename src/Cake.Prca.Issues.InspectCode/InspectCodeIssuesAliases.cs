@@ -22,7 +22,7 @@
         /// <code>
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         InspectCodeIssuesFromFilePath(
         ///             new FilePath("C:\build\InspectCode.log")),
         ///         TfsPullRequests(
@@ -56,7 +56,7 @@
         /// <code>
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         InspectCodeIssuesFromContent(
         ///             logFileContent),
         ///         TfsPullRequests(
@@ -94,7 +94,7 @@
         ///         new InspectCodeIssuesSettings(
         ///             new FilePath("C:\build\InspectCode.log"));
         ///
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         InspectCodeIssues(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
